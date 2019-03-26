@@ -1,0 +1,41 @@
+# Changelog
+
+
+## 0.5.2
+
+- **Upate**: ExpresseionEngine 3 Compatibility
+
+## 0.5.1
+
+- **Fixed**: Exit if no entry_id exists in the entry's data
+
+## 0.5
+
+- **Fixed**: Improved removal of old entry and category redirects when redirects ones replace it
+
+## 0.4
+
+- **Added**: Added status support to restrict certain statuses such a closed status from adding redirects unnecessarily
+- **Added**: Will now remove redirects where new entries are created which have the same url as a redirected url: The "End Date" of the redirect is changed to yesterday!
+
+## 0.3
+
+- **Added**: Ability to add entry dates within URI settings. Example: post/{entry_date format="%y"}/{entry_date format="%j"}
+
+## 0.2
+
+- **Added**: Added the ability to set an amount of time before a redirect is created after new channel entries are created and edited.
+- **Added**: Added the ability to select Channel Statuses from which a redirect should be created.
+- **Fix**: End date issue within Channel redirects
+
+
+## 0.1
+
+- Initial Build
+
+
+
+# Roadmap
+
+- Consider removing redirects when status is changed to closed or other selected status
+- See if we can add support for structure and pages
