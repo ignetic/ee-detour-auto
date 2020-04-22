@@ -33,12 +33,6 @@ class Detour_auto_ext {
 	{
 		$this->EE = get_instance();
 		$this->site_id = ($this->EE->config->item('site_id')) ? $this->EE->config->item('site_id') : 1;
-
-		/*if (!defined('BASE'))
-		{
-			$s = (ee()->config->item('admin_session_type') != 'c') ? ee()->session->userdata('session_id') : 0;
-			define('BASE', SELF . '?S=' . $s . '&amp;D=cp');
-		}*/
 		
 		if (defined('APP_VER') && version_compare(APP_VER, '3.0.0', '<'))
 		{
@@ -46,9 +40,6 @@ class Detour_auto_ext {
 		}
 		
 		$this->settings = isset($settings[$this->site_id]) ? $settings[$this->site_id] : array();
-
-//		$this->_base_url = $this->EE2 ? BASE.AMP.'C=addons_extensions'.AMP.'M=extension_settings'.AMP.'file=detour_auto' : ee('CP/URL', 'addons/settings/detour_auto'); 
-//		$this->_settings_url = $this->EE2 ? 'C=addons_extensions'.AMP.'M=save_extension_settings'.AMP.'file=detour_auto' : $this->_base_url.'/save'; 
 		
 	}
 	
@@ -144,7 +135,23 @@ class Detour_auto_ext {
 			$statuses['open'] = lang('open');
 			$statuses['closed'] = lang('closed');
 			
-			$query = $this->EE->status_model->get_statuses('', $row['channel_id']);
+			// EE4 stores statuses in separate table
+			if (ee()->db->table_exists('channels_statuses'))
+			{
+				$this->EE->db->select('status')
+						->join('channels_statuses', 'channels_statuses.status_id = statuses.status_id', 'inner')
+						->where('channel_id', $row['channel_id'])
+						->order_by('status_order', 'ASC')
+						->distinct();
+
+				$query = $this->EE->db->get('statuses');
+
+			}
+			else
+			{	
+				$query = $this->EE->status_model->get_statuses('', $row['channel_id']);
+			}
+			
 			if ($query->num_rows())
 			{
 				foreach ($query->result_array() as $status)
@@ -675,7 +682,7 @@ class Detour_auto_ext {
 		
 		$query = $this->EE->db->select('url_title, channel_id')
 				->from('channel_titles')
-				->where('entry_id', $entry_id)
+				->where('entry_id', $val)
 				->where('site_id', $this->site_id)
 				->get();
 		

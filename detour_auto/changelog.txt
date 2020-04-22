@@ -1,6 +1,10 @@
 # Changelog
 
 
+## 0.6
+
+- **Upate**: ExpresseionEngine 4 Compatibility
+
 ## 0.5.2
 
 - **Upate**: ExpresseionEngine 3 Compatibility
