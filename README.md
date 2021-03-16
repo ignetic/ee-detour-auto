@@ -2,7 +2,8 @@ Detour Pro Auto
 ===============
 
 For ExpressionEngine
-EE2 - EE3 Compatible
+EE2, EE3, EE4, EE5 Compatible
+Required Detour Pro addon.
 
 Automatically create redirects for "Detour Pro" addon when renaming an entry or category URL Title. 
 
